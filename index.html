@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="hotdogApp">
+	<head>
+		<meta charset=utf-8 />
+		<title>Hot Dog Customizer</title>
+	</head>
+	<body ng-controller="AppControls">
+
+		<div visualizer hot-dog-data="hotDog"></div>
+
+		<!-- JS Resources -->
+
+		<!-- external libs -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
+
+		<!-- app files -->
+		<script src="app.js"></script>
+		<script src="hot-dog-service.js"></script>
+
+		<script src="visualizer.js"></script>
+		<script src="bun-base.js"></script>
+		<script src="dog.js"></script>
+		<script src="bun-top.js"></script>
+	</body>
+</html>

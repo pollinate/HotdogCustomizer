@@ -1,0 +1,21 @@
+<div>
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		version="1.1"
+		id="map"
+		x="0"
+		y="0"
+		ng-attr-width="{{hotDogData.width}}"
+		ng-attr-height="{{hotDogData.height}}"
+		xml:space="preserve">
+
+		<g bun-base bun-data="hotDogData.bun" ng-attr-width="{{hotDogData.width}}" ng-attr-height="{{hotDogData.height}}"></g>
+
+		<g dog dog-data="hotDogData.dog" ng-attr-width="{{hotDogData.width-30}}" ng-attr-height="{{hotDogData.height-30}}"></g>
+
+		<g bun-top bun-data="hotDogData.bun" ng-attr-width="{{hotDogData.width}}" ng-attr-height="{{hotDogData.height}}"></g>
+
+		<g ng-repeat="topping in toppings" ></g>
+
+	</svg>
+</div>
