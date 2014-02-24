@@ -23,6 +23,14 @@
 					<br/>
 					<select ng-model="hotDog.backdrop.selected" ng-options="filename for filename in hotDog.backdrop.images"></select>
 				</span>
+				<br/>
+
+				<button ng-click="addCondiment()">add a condiment</button>
+				<p ng-repeat="condiment in hotDog.condiments">
+					amount <input type="range" min="3" max="50" step="1" ng-model="condiment.amount"/>
+					type <select ng-options="type.name for type in condimentTypes" ng-model="condiment.type"/>
+					<a style="float:right" href='#' ng-click="$parent.removeCondiment($index)">X</a>
+				</p>
 			</div>
 		</div>
 		
@@ -39,5 +47,6 @@
 		<script src="js/visualizer.js"></script>
 		<script src="js/imageLoader.js"></script>
 		<script src="js/dog.js"></script>
+		<script src="js/condiment.js"></script>
 	</body>
 </html>

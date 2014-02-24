@@ -29,7 +29,11 @@
 				raw: 'assets/frank.png',
 				burned: 'assets/burned.png',
 				percent: 0.5
-			}
+			},
+
+			condiments: [],
+
+			toppings: []
 		};
 
 		return hotDog;

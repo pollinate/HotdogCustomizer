@@ -17,7 +17,9 @@
 			link: function(scope){
 
 				scope.$watch('hotDogData', function(newVal){
-					if(newVal === undefined){return;}
+					if(newVal === undefined){
+						return;
+					}
 				}, true);
 
 			}
