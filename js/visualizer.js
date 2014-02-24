@@ -12,7 +12,7 @@
 				hotDogData: '='
 			},
 
-			templateUrl: 'vizbase.html',
+			templateUrl: 'partials/vizbase.html',
 
 			link: function(scope){
 
