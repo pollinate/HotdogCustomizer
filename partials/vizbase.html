@@ -9,11 +9,15 @@
 		ng-attr-height="{{hotDogData.height}}"
 		xml:space="preserve">
 
-		<g bun-base bun-data="hotDogData.bun" ng-attr-width="{{hotDogData.width}}" ng-attr-height="{{hotDogData.height}}"></g>
+		<g image-loader name="backdrop" url="hotDogData.backdrop" ng-attr-width="{{hotDogData.width}}" ng-attr-height="{{hotDogData.height}}"></g>
+
+		<g image-loader name="bun-base" url="hotDogData.bun.base" ng-attr-width="{{hotDogData.width}}" ng-attr-height="{{hotDogData.height}}"></g>
 
 		<g dog dog-data="hotDogData.dog" ng-attr-width="{{hotDogData.width-30}}" ng-attr-height="{{hotDogData.height-30}}"></g>
 
-		<g bun-top bun-data="hotDogData.bun" ng-attr-width="{{hotDogData.width}}" ng-attr-height="{{hotDogData.height}}"></g>
+		<g image-loader name="bun-top" url="hotDogData.bun.top" ng-attr-width="{{hotDogData.width}}" ng-attr-height="{{hotDogData.height}}"></g>
+
+		<g ng-repeat="condiment in condiments" ></g>
 
 		<g ng-repeat="topping in toppings" ></g>
 

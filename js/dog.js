@@ -4,7 +4,7 @@
 	'use strict';
 
 	angular.module('hotdogApp.directives')
-	.directive('dog', [ function(){
+	.directive('dog', ['$q', function($q){
 		return {
 			restrict: 'A',
 
@@ -16,41 +16,68 @@
 
 			link: function(scope, elem){
 				scope.$watch('dogData', function(newVal){
-					if(newVal === undefined || !newVal.hasOwnProperty('url')){return;}
-					updateUrl(newVal.url);
-				});
-
-				scope.$watchCollection('[width, height]', function(newVals){
-					if(typeof newVals[0] === 'number' && typeof newVals[1] === 'number'){
-						elem.find('image').attr({
-							width: newVals[0],
-							height: newVals[1]
-						});
-					}
-					
+					if(newVal === undefined){return;}
+					updateDog(newVal.percent);
 				}, true);
 
-				function updateUrl(path){
+				function updateDog(percent){
 					//we make a new element each time to get a new onload we can hook into (they're one-use in Chrome)
 					var imgElem = document.createElementNS('http://www.w3.org/2000/svg', 'image');
 					var dummyImg = new Image();
 
-					$(imgElem).attr({
-						width: scope.width,
-						height: scope.height,
-						x: 10,
-						y: 20
-					});
+					var can = document.createElement('canvas'),
+						ctx = can.getContext('2d'),
+						imgRaw = new Image(),
+						imgBurned = new Image(),
+						rawDefer = $q.defer(),
+						rawPromise = rawDefer.promise,
+						burnedDefer = $q.defer(),
+						burnedPromise = burnedDefer.promise;
 
-					dummyImg.onload = function(){
-						scope.$emit('complete', {name: 'bun', id: scope.$id});
+					can.width = scope.width;
+					can.height = scope.height;
+
+					imgRaw.onload = function(){
+						rawDefer.resolve();
 					};
 
-					imgElem.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', path);
+					imgRaw.src = scope.dogData.raw;
 
-					dummyImg.src = path;
+					imgBurned.onload = function(){
+						burnedDefer.resolve();
+					};
 
-					elem.empty().append(imgElem);
+					imgBurned.src = scope.dogData.burned;
+
+					$q.all([rawPromise, burnedPromise]).then(function(){
+						var path;
+
+						ctx.globalAlpha = 1-percent;
+						ctx.drawImage(imgRaw,0,0);
+						ctx.globalAlpha = percent;
+						ctx.drawImage(imgBurned,0,0);
+						ctx.globalAlpha = 1;
+
+						$(imgElem).attr({
+							width: scope.width,
+							height: scope.height,
+							x: 30,
+							y: 200
+						});
+
+						path = can.toDataURL();
+
+						dummyImg.onload = function(){
+							scope.$emit('complete', {name: 'dog', id: scope.$id});
+						};
+
+						imgElem.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', path);
+
+						dummyImg.src = path;
+
+						elem.empty().append(imgElem);
+					});
+
 				}
 			}
 

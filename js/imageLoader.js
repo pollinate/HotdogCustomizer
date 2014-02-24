@@ -4,31 +4,22 @@
 	'use strict';
 
 	angular.module('hotdogApp.directives')
-	.directive('bunTop', [ function(){
+	.directive('imageLoader', [ function(){
 		return {
 			restrict: 'A',
 
 			scope: {
-				bunData: '=',
+				url: '=',
 				width: '@',
-				height: '@'
+				height: '@',
+				name: '@'
 			},
 
 			link: function(scope, elem){
-				scope.$watch('bunData', function(newVal){
-					if(newVal === undefined || !newVal.hasOwnProperty('top')){return;}
-					updateUrl(newVal.top);
+				scope.$watch('url', function(newVal){
+					if(newVal === undefined || !newVal.length){return;}
+					updateUrl(newVal);
 				});
-
-				scope.$watchCollection('[width, height]', function(newVals){
-					if(typeof newVals[0] === 'number' && typeof newVals[1] === 'number'){
-						elem.find('image').attr({
-							width: newVals[0],
-							height: newVals[1]
-						});
-					}
-					
-				}, true);
 
 				function updateUrl(path){
 					//we make a new element each time to get a new onload we can hook into (they're one-use in Chrome)
@@ -43,7 +34,7 @@
 					});
 
 					dummyImg.onload = function(){
-						scope.$emit('complete', {name: 'bun-top', id: scope.$id});
+						scope.$emit('complete', {name: scope.name, id: scope.$id});
 					};
 
 					imgElem.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', path);

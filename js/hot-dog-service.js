@@ -12,13 +12,17 @@
 			width: 500,
 			height: 500,
 
+			backdrop: '',
+
 			bun: {
 				base: 'assets/empty-hot-dog-bun.png',
 				top: 'assets/bun-top.png'
 			},
 
 			dog: {
-				url: 'assets/frank.png'
+				raw: 'assets/frank.png',
+				burned: 'assets/burned.png',
+				percent: 0.5
 			}
 		};
 
