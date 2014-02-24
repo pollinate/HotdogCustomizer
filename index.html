@@ -3,13 +3,29 @@
 	<head>
 		<meta charset=utf-8 />
 		<title>Hot Dog Customizer</title>
+		<link href="styles.css" rel="stylesheet" type="text/css"/>
 	</head>
 	<body ng-controller="AppControls">
 
-		<div visualizer hot-dog-data="hotDog"></div>
+		<div id="content">
+			<div visualizer hot-dog-data="hotDog"></div>
 
-		<input type="range" min="0" max="1" step="0.1" ng-model="hotDog.dog.percent"/>
+			<div id="controls">
 
+				<span style="float:left">
+					<label>How do you like your hot dog?</label>
+					<br/>
+					rare <input type="range" min="0" max="1" step="0.1" ng-model="hotDog.dog.percent"/> well done
+				</span>
+
+				<span style="float:right">
+					<label>choose an exotic locale:</label>
+					<br/>
+					<select ng-model="hotDog.backdrop.selected" ng-options="filename for filename in hotDog.backdrop.images"></select>
+				</span>
+			</div>
+		</div>
+		
 		<!-- JS Resources -->
 
 		<!-- external libs -->

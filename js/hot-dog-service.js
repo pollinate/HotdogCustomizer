@@ -12,7 +12,13 @@
 			width: 500,
 			height: 500,
 
-			backdrop: '',
+			backdrop: {
+				images: [
+					'assets/coney-island.jpg',
+					'assets/ground-zero-pentagon.jpg'
+				],
+				selected: ''
+			},
 
 			bun: {
 				base: 'assets/empty-hot-dog-bun.png',
