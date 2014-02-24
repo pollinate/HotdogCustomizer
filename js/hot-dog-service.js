@@ -15,7 +15,8 @@
 			backdrop: {
 				images: [
 					'assets/coney-island.jpg',
-					'assets/ground-zero-pentagon.jpg'
+					'assets/ground-zero-pentagon.jpg',
+					'assets/Swords_of_qadisiyah.jpg'
 				],
 				selected: ''
 			},
