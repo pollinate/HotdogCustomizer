@@ -10,6 +10,7 @@
 		'hotdogApp.controllers',
 		'hotdogApp.directives',
 		'hotDogService',
+		'slideService',
 		'ngRoute'
 	],
 	function($routeProvider, $locationProvider){
