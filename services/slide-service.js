@@ -10,18 +10,19 @@
 		var slides = [
 			{
 				title: 'Background',
-				text:'lorem ipsum sit dolor amet',
-				code:'$scope.number = $routeParams.slideId;'
+				text:'Product customizers require visualization elements.',
+				image: '',
+				code:''
 			},
 			{
 				title: 'The problem',
-				text:'but you don\'t have to take my word for it',
+				text:'How to visualize a product with complex logic?',
 				image: 'http://placecage.com/c/400/400',
-				code:'$scope.number = 4;'
+				code:''
 			},
 			{
 				title: 'Our solution',
-				text: '',
+				text: 'Create directives within an SVG to manage visualization',
 				image: '',
 				code: ''
 			},
