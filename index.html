@@ -5,48 +5,38 @@
 		<title>Hot Dog Customizer</title>
 		<link href="styles.css" rel="stylesheet" type="text/css"/>
 	</head>
-	<body ng-controller="AppControls">
+	<body ng-controller="BodyController">
+	<h4>Contents</h4>
+	<header>
+		<a ng-repeat="location in locations" ng-href="/{{location.path}}">
+			<span class="headerlisting" >
+				{{location.name}}
+			</span>
+		</a>
+	</header>
 
-		<div id="content">
-			<div visualizer hot-dog-data="hotDog"></div>
+	<div ng-view></div>
 
-			<div id="controls">
-
-				<span style="float:left">
-					<label>How do you like your hot dog?</label>
-					<br/>
-					rare <input type="range" min="0" max="1" step="0.1" ng-model="hotDog.dog.percent"/> well done
-				</span>
-
-				<span style="float:right">
-					<label>choose an exotic locale:</label>
-					<br/>
-					<select ng-model="hotDog.backdrop.selected" ng-options="filename for filename in hotDog.backdrop.images"></select>
-				</span>
-				<br/>
-
-				<button ng-click="addCondiment()">add a condiment</button>
-				<p ng-repeat="condiment in hotDog.condiments">
-					amount <input type="range" min="3" max="50" step="1" ng-model="condiment.amount"/>
-					type <select ng-options="type.name for type in condimentTypes" ng-model="condiment.type"/>
-					<a style="float:right" href='#' ng-click="$parent.removeCondiment($index)">X</a>
-				</p>
-			</div>
-		</div>
-		
-		<!-- JS Resources -->
 
 		<!-- external libs -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-route.js"></script>
+
 
 		<!-- app files -->
-		<script src="js/app.js"></script>
-		<script src="js/hot-dog-service.js"></script>
+		<script src="app.js"></script>
 
-		<script src="js/visualizer.js"></script>
-		<script src="js/imageLoader.js"></script>
-		<script src="js/dog.js"></script>
-		<script src="js/condiment.js"></script>
+		<script src="controllers/body-controller.js"></script>
+		<script src="controllers/dog-controller.js"></script>
+		<script src="controllers/slide-controller.js"></script>
+
+		<script src="services/hot-dog-service.js"></script>
+
+		<script src="directives/visualizer.js"></script>
+		<script src="directives/imageLoader.js"></script>
+		<script src="directives/dog.js"></script>
+		<script src="directives/condiment.js"></script>
+
 	</body>
 </html>
