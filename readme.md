@@ -7,7 +7,7 @@ This app demonstrates using Angular directives to construct a dynamic SVG in you
 ##To run:
 Start a local server in the root directory. I recommend using Httpster: http://simbco.github.io/httpster/ This will open the reveal.js presentation on port 3333.
 
-###License for Reuse
+##License for Reuse
 
 The MIT License (MIT)
 
