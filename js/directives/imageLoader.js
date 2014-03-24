@@ -16,13 +16,18 @@
 			},
 
 			link: function(scope, elem){
+
+				scope.$emit('rendering', {name: scope.name, id: scope.$id});
+
 				scope.$watch('url', function(newVal){
 					if(newVal === undefined || !newVal.length){return;}
+					scope.$emit('rendering', {name: scope.name, id: scope.$id});
 					updateUrl(newVal);
 				});
 
 				function updateUrl(path){
-					//we make a new element each time to get a new onload we can hook into (they're one-use in Chrome)
+					//we make a new <img> element each time to get a new onload we can hook into (they're one-use)
+					//SVG <image> tags have no onload
 					var imgElem = document.createElementNS('http://www.w3.org/2000/svg', 'image');
 					var dummyImg = new Image();
 
@@ -34,7 +39,7 @@
 					});
 
 					dummyImg.onload = function(){
-						scope.$emit('complete', {name: scope.name, id: scope.$id});
+						scope.$emit('complete', {name: scope.name, id: scope.$id, dataUrl: path});
 					};
 
 					imgElem.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', path);
@@ -43,6 +48,10 @@
 
 					elem.empty().append(imgElem);
 				}
+
+				scope.$on('$destroy', function () {
+					scope.$emit('destroyed', {name: scope.name, id: scope.$id});
+				});
 			}
 
 		};

@@ -12,14 +12,7 @@
 			width: 500,
 			height: 500,
 
-			backdrop: {
-				images: [
-					'assets/coney-island.jpg',
-					'assets/ground-zero-pentagon.jpg',
-					'assets/Swords_of_qadisiyah.jpg'
-				],
-				selected: ''
-			},
+			backdrop:'',
 
 			bun: {
 				base: 'assets/empty-hot-dog-bun.png',
@@ -32,9 +25,7 @@
 				percent: 0.5
 			},
 
-			condiments: [],
-
-			toppings: []
+			condiments: []
 		};
 
 		return hotDog;

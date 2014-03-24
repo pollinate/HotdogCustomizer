@@ -1,43 +1,206 @@
-<!DOCTYPE html>
-<html ng-app="hotdogApp">
-	<head>
-		<meta charset=utf-8 />
-		<title>Hot Dog Customizer</title>
-		<link href="styles.css" rel="stylesheet" type="text/css"/>
-	</head>
-	<body ng-controller="BodyController">
-	<h4>Contents</h4>
-	<header>
-		<a ng-repeat="location in locations" ng-href="/{{location.path}}">
-			<span class="headerlisting" >
-				{{location.name}}
-			</span>
-		</a>
-	</header>
+<!doctype html>
+<html lang="en" ng-app="hotdogApp">
+<head>
+	<meta charset="utf-8">
+	<title>Product visualization made easy with Angular</title>
+	<link rel="stylesheet" href="css/reveal.min.css">
+	<link rel="stylesheet" href="css/night.css">
+	<link rel="stylesheet" href="css/styles.css">
+</head>
+<body ng-controller="BodyController">
+	<div class="reveal">
+		<div class="slides">
 
-	<div ng-view></div>
+			<section>
+				<h1>Product visualization made easy with Angular</h1>
+				<br/><br/>
+				<h3>Duncan Alexander</h3>
+				<h3>@hypothete on Twitter</h3>
+				<div style="width:162px; height:61px; background:url(assets/pollinate.png)"></div>
+			</section>
 
+			<section>
+				<h1>Demo</h1>
+				<div class="content" ng-controller="DogController">
+					<div visualizer hot-dog-data="hotDog"></div>
+					<div id="controls">
+						<span style="float:left">
+							<label>How do you like your hot dog?</label>
+							<br/>
+							rare <input type="range" min="0" max="1" step="0.1" ng-model="hotDog.dog.percent"/> well done
+						</span>
 
-		<!-- external libs -->
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
-		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-route.js"></script>
+						<span style="float:right">
+							<label>choose an exotic locale:</label>
+							<br/>
+							<select ng-model="hotDog.backdrop" ng-options="filename for filename in backgroundImages"></select>
+						</span>
+						<br/><br/>
+						<button ng-click="addCondiment()">add a condiment
+						</button>
+						<p ng-repeat="condiment in hotDog.condiments">
+							amount <input type="range" min="3" max="50" step="1" ng-model="condiment.amount"/>
+							type <select ng-options="type.name for type in condimentTypes" ng-model="condiment.type"></select>
+							<a style="margin-left:100px" ng-click="$parent.removeCondiment($index)">X</a>
+						</p>
+					</div>
+				</div>
+			</section>
 
+			<section data-background="assets/customizers.jpg">
+				<h1>Businesses want product customizers</h1>
+			</section>
 
-		<!-- app files -->
-		<script src="app.js"></script>
+			<section>
+				<h1>What does our visualization provide?</h1>
+			</section>
 
-		<script src="controllers/body-controller.js"></script>
-		<script src="controllers/dog-controller.js"></script>
-		<script src="controllers/slide-controller.js"></script>
+			<section data-background="">
+				<h1>Instant feedback for the customer</h1>
+				<img src="assets/happy-customer.jpg"/>
+			</section>
 
-		<script src="services/hot-dog-service.js"></script>
-		<script src="services/slide-service.js"></script>
+			<section data-background="">
+				<h1>
+					Specifications for the manufacturer
+				</h1>
+				<img src="assets/hot-dog-stand.jpg"/>
+			</section>
 
-		<script src="directives/visualizer.js"></script>
-		<script src="directives/imageLoader.js"></script>
-		<script src="directives/dog.js"></script>
-		<script src="directives/condiment.js"></script>
+			<section data-background="">
+				<h1>
+					Richer web content
+				</h1>
+				<img src="assets/halloweenie.png"/>
+			</section>
 
-	</body>
+			<section>
+				<h2>First attempt:canvas-based masking</h2>
+				<iframe src="http://hypothete.com/images/2013/shirt" width="800" height="600"></iframe>
+			</section>
+
+			<section>
+				<h1>Canvas is a destination</h1>
+				<img src="assets/domexception.jpg" width="800px"/>
+			</section>
+
+			<section>
+				<h2>Second attempt: SVG as the middleman</h2>
+				<br/><br/>
+				<h3>
+					<ol>
+						<li>SVG paths for colorization</li>
+						<li><a href="https://code.google.com/p/canvg/" target="blank">canvg</a></li>
+						<li>combine with rasters for current step</li>
+						<li>combine with all steps</li>
+						<li>do this every time we make a change...</li>
+					</ol>
+				</h3>
+			</section>
+
+			<section>
+				<h1>What if...</h1>
+				<p>The SVG was made of directives?</p>
+			</section>
+
+			<section data-background="assets/directive-template.jpg">
+			</section>
+
+			<section>
+				<h1>SVGs are just XML</h1>
+			</section>
+
+			<section ng-controller="IsolateDemo">
+				<h1>Setting up your scope</h1>
+				<div style="display:inline-block" visualizer hot-dog-data="firstHotDog"></div>
+				<div style="display:inline-block" visualizer hot-dog-data="secondHotDog"></div>
+			</section>
+
+			<section>
+				<h1>Bidirectional binding (=) is your new best friend</h1>
+				<input type="text" ng-model="textShare"/>
+				<input type="text" ng-model="textShare"/>
+			</section>
+
+			<section data-background="">
+				<h1>Living with SVGs</h1>
+				<img src="assets/openingtag.png" width="800px" />
+				<h3>document.createElementNS('http://www.w3.org/1999/xlink', 'svg');</h3>
+			</section>
+
+			<section>
+				<h1>&lt;g&gt; tags are the divs of SVG</h1>
+			</section>
+			
+			<section>
+				<h1><i>ngAttr</i> bindings</h1>
+			</section>
+
+			<section>
+				<h1><i>ngRepeat</i></h1>
+				<img src="assets/ngrepeat.png" width="800px"/>
+			</section>
+
+			<section>
+				<h1>Scope IDs will save you headaches</h1>
+				<img src="assets/batarang.jpg"/>
+			</section>
+
+			<section>
+				<h1>Images are asynchronous</h1>
+				<img src="assets/not-sure-if-slow-internet.jpg"/>
+				<h3>$q.all([ajax requests]).then(function(aggregate){});</h3>
+			</section>
+
+			<section>
+				<h1>Preload your fonts</h1>
+				<br/><br/>
+				<p>Make a separate directive, or one in the wrapper that controls an ng-if</p>
+				<p>Still working out font issues in IE</p>
+			</section>
+
+			<section>
+				<h1>How to know when your visualization has finished</h1>
+			</section>
+
+			<section>
+				<h1>Event monitoring system</h1>
+				<!-- illustrate -->
+			</section>
+
+			<section>
+				<h1>Questions?</h1>
+				<p>Duncan Alexander - @hypothete on Twitter</p>
+			</section>
+
+			
+		</div>
+	</div>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
+	<script src="js/reveal.min.js"></script>
+	<script src="js/canvg.js"></script>
+
+	<script src="js/angular-app.js"></script>
+
+	<script src="js/controllers/body-controller.js"></script>
+	<script src="js/controllers/dog-controller.js"></script>
+	<script src="js/controllers/isolate-demo.js"></script>
+
+	<script src="js/services/hot-dog-service.js"></script>
+
+	<script src="js/directives/visualizer.js"></script>
+	<script src="js/directives/imageLoader.js"></script>
+	<script src="js/directives/dog.js"></script>
+	<script src="js/directives/condiment.js"></script>
+
+	<script>
+		// Required, even if empty.
+		Reveal.initialize({
+			controls: true,
+			slideNumber:true,
+			transition: 'linear'
+		});
+	</script>
+</body>
 </html>

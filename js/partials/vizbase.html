@@ -1,0 +1,33 @@
+<div class="wrapper">
+
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		xmlns:xlink="http://www.w3.org/1999/xlink"
+		version="1.1"
+		id="map"
+		x="0"
+		y="0"
+		ng-attr-width="{{hotDogData.width}}"
+		ng-attr-height="{{hotDogData.height}}"
+		xml:space="preserve">
+
+		<defs>
+			<style>
+			</style>
+		</defs>
+
+		<g image-loader name="backdrop" url="hotDogData.backdrop" ng-attr-width="{{hotDogData.width}}" ng-attr-height="{{hotDogData.height}}"></g>
+
+		<g image-loader name="bun-base" url="hotDogData.bun.base" ng-attr-width="{{hotDogData.width}}" ng-attr-height="{{hotDogData.height}}"></g>
+
+		<g dog dog-data="hotDogData.dog" ng-attr-width="{{hotDogData.width-30}}" ng-attr-height="{{hotDogData.height-30}}"></g>
+
+		<g ng-repeat="someCondiment in hotDogData.condiments" >
+			<g condiment condiment-data="someCondiment"></g>
+		</g>
+
+		<g image-loader name="bun-top" url="hotDogData.bun.top" ng-attr-width="{{hotDogData.width}}" ng-attr-height="{{hotDogData.height}}"></g>
+
+	</svg>
+	
+</div>
