@@ -50,7 +50,7 @@
 				</div>
 			</section>
 
-			<section data-background="assets/customizers.jpg">
+			<section>
 				<h1>Businesses want product customizers</h1>
 			</section>
 
@@ -59,44 +59,48 @@
 			</section>
 
 			<section data-background="">
-				<h1>Instant feedback for the customer</h1>
+				<h2>Instant feedback for the customer</h2>
 				<img src="assets/happy-customer.jpg"/>
 			</section>
 
 			<section data-background="">
-				<h1>
+				<h2>
 					Specifications for the manufacturer
-				</h1>
+				</h2>
 				<img src="assets/hot-dog-stand.jpg"/>
 			</section>
 
 			<section data-background="">
-				<h1>
+				<h2>
 					Richer web content
-				</h1>
+				</h2>
 				<img src="assets/halloweenie.png"/>
 			</section>
 
 			<section>
-				<h2>First attempt:canvas-based masking</h2>
+				<h1>Early attempts</h1>
+			</section>
+
+			<section>
+				<h2>Canvas-based masking</h2>
 				<iframe src="http://hypothete.com/images/2013/shirt" width="800" height="600"></iframe>
 			</section>
 
 			<section>
-				<h1>Canvas is a destination</h1>
+				<h1>Treat the Canvas as a destination</h1>
 				<img src="assets/domexception.jpg" width="800px"/>
+				<h3>(most of the time)</h3>
 			</section>
 
 			<section>
-				<h2>Second attempt: SVG as the middleman</h2>
-				<br/><br/>
+				<h2>SVG as the middleman</h2>
+				<br/>
 				<h3>
 					<ol>
-						<li>SVG paths for colorization</li>
-						<li><a href="https://code.google.com/p/canvg/" target="blank">canvg</a></li>
-						<li>combine with rasters for current step</li>
-						<li>combine with all steps</li>
-						<li>do this every time we make a change...</li>
+						<li class="fragment" data-fragment-index="1">SVG paths for colorization</li>
+						<li class="fragment" data-fragment-index="2"><a href="https://code.google.com/p/canvg/" target="blank">canvg</a></li>
+						<li class="fragment" data-fragment-index="3">combine with all steps</li>
+						<li class="fragment" data-fragment-index="4">do this every time we make a change...</li>
 					</ol>
 				</h3>
 			</section>
@@ -104,14 +108,24 @@
 			<section>
 				<h1>What if...</h1>
 				<br/><br/>
-				<h3>The SVG was made of directives?</h3>
+				<h3 class="fragment" data-fragment-index="1">The SVG was made of directives?</h3>
 			</section>
 
-			<section data-background="assets/directive-template.jpg">
+			<section data-background="assets/directive-template.png">
 			</section>
 
 			<section>
-				<h1>SVGs are just XML</h1>
+				<h1>Working with SVG-based directives</h1>
+			</section>
+
+			<section data-background="">
+				<h1>Namespace your elements</h1>
+				<img src="assets/openingtag.png" width="800px" />
+				<code>document.createElementNS('http://www.w3.org/2000/svg', 'svg');</code>
+			</section>
+
+			<section>
+				<h1>&lt;g&gt; tags are the divs of SVG</h1>
 			</section>
 
 			<section ng-controller="IsolateDemo">
@@ -128,16 +142,6 @@
 
 			<section>
 				<img src="assets/isolate-scope.png"/>
-			</section>
-
-			<section data-background="">
-				<h1>Living with SVGs</h1>
-				<img src="assets/openingtag.png" width="800px" />
-				<h3>document.createElementNS('http://www.w3.org/1999/xlink', 'svg');</h3>
-			</section>
-
-			<section>
-				<h1>&lt;g&gt; tags are the divs of SVG</h1>
 			</section>
 			
 			<section>
@@ -157,7 +161,14 @@
 			<section>
 				<h1>Images are asynchronous</h1>
 				<img src="assets/not-sure-if-slow-internet.jpg"/>
-				<h3>$q.all([ajax requests]).then(function(aggregate){});</h3>
+				<br/>
+				<code>$q.all([ajax requests]).then(function(aggregate){});</code>
+			</section>
+
+			<section>
+				<code data-trimstyle="text-align:left;">
+					<img src="assets/dummy-image.png" class="stretch"/>
+				</code>
 			</section>
 
 			<section>
@@ -176,7 +187,11 @@
 
 			<section>
 				<h1>Questions?</h1>
-				<p>Duncan Alexander - @hypothete</p>
+				<br/><br/>
+				<h3>Duncan Alexander (<a href="http://twitter.com/hypothete" target="blank">@hypothete</a>)</h3>
+				<h3>
+				<a href="https://github.com/pollinate/HotdogCustomizer" target="blank">github.com/pollinate/HotdogCustomizer</a>
+				</h3>
 			</section>
 
 			
